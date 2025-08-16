@@ -42,6 +42,7 @@ export class CustomersService {
 
     const messyCustomers = customers.map((c, index) => ({
       info: {
+        id: c.id,
         nomeCompleto: c.name,
         detalhes: {
           email: c.email,
