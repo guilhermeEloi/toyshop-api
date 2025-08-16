@@ -42,6 +42,7 @@ export class CustomersService {
 
     const messyCustomers = customers.map((c, index) => ({
       info: {
+        id: c.id,
         nomeCompleto: c.name,
         detalhes: {
           email: c.email,
@@ -76,8 +77,7 @@ export class CustomersService {
       const exists = await this.customer.findOne({
         where: { email: customer.email, id: Not(id), deletedAt: IsNull() },
       });
-      if (exists)
-        throw new BadRequestException('Email já cadastrado por outro cliente');
+      if (exists) throw new BadRequestException('E-mail already registered');
     }
     Object.assign(found, { ...customer, updatedAt: new Date() });
     return this.customer.save(found);
